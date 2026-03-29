@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://cdeaoc6ddtc6l"]
+
+[ext_resource type="Script" uid="uid://86jppgk46l30" path="res://scenes/start_scene.gd" id="1_3tgnh"]
+[ext_resource type="Texture2D" uid="uid://dw2ovaw2bdi8q" path="res://images/escena_AMORAL.jpg" id="1_cokmr"]
+[ext_resource type="FontFile" uid="uid://uvaitt60kkpm" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3_u7rsi"]
+[ext_resource type="Texture2D" uid="uid://rxcgh0j1hho4" path="res://images/animacion2.png" id="4_i331m"]
+
+[node name="startScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_3tgnh")
+
+[node name="backgroundImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_cokmr")
+expand_mode = 2
+
+[node name="NarrationLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 327.99997
+offset_top = 744.0
+offset_right = 367.99997
+offset_bottom = 767.0
+scale = Vector2(2.416888, 1.6222751)
+theme_override_constants/line_spacing = 1
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("3_u7rsi")
+theme_override_font_sizes/font_size = 10
+
+[node name="Screen2" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("4_i331m")
+expand_mode = 2

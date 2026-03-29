@@ -1,0 +1,386 @@
+[gd_scene load_steps=34 format=4 uid="uid://c1gi3mxlcmasp"]
+
+[ext_resource type="Script" uid="uid://lotad00wvm1" path="res://scripts/player.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://bukbu0b0vs6rc" path="res://scripts/main.gd" id="1_yc10j"]
+[ext_resource type="Texture2D" uid="uid://cftrlc64ko7ix" path="res://characters/player/idle/idle_down.png" id="2_sugp2"]
+[ext_resource type="Texture2D" uid="uid://b4nk5823eirn2" path="res://characters/player/idle/idle_left.png" id="3_dp3eg"]
+[ext_resource type="Texture2D" uid="uid://dmn3e6y6xnrdr" path="res://characters/player/idle/idle_right.png" id="4_0ld40"]
+[ext_resource type="Texture2D" uid="uid://xuid08410u8r" path="res://characters/player/idle/idle_up.png" id="5_gqmmt"]
+[ext_resource type="Texture2D" uid="uid://dt0nuvxv54xbq" path="res://characters/player/walk/walk_down2.png" id="6_yc10j"]
+[ext_resource type="Texture2D" uid="uid://bkou8ernuvsyt" path="res://characters/player/walk/walk_down.png" id="7_jscy8"]
+[ext_resource type="Texture2D" uid="uid://brk6xvuo6ch42" path="res://characters/player/walk/walk_down3.png" id="8_pm3ni"]
+[ext_resource type="Texture2D" uid="uid://ba6fnvnnvt6do" path="res://characters/player/walk/walk_left2.png" id="9_y6deb"]
+[ext_resource type="Texture2D" uid="uid://b641gcitaqp48" path="res://characters/player/walk/walk_left.png" id="10_og1vs"]
+[ext_resource type="Texture2D" uid="uid://duns4rivurwce" path="res://characters/player/walk/walk_left3.png" id="11_2wyq8"]
+[ext_resource type="Texture2D" uid="uid://w4tfqte2f6wb" path="res://characters/player/walk/walk_right2.png" id="12_vxglm"]
+[ext_resource type="Texture2D" uid="uid://dykik7q3vrfrx" path="res://characters/player/walk/walk_right.png" id="13_2f3dj"]
+[ext_resource type="Texture2D" uid="uid://kni2i7480dbo" path="res://characters/player/walk/walk_right3.png" id="14_yq6so"]
+[ext_resource type="Texture2D" uid="uid://d0wm5dw1oeg58" path="res://characters/player/walk/walk_up2.png" id="15_fv21b"]
+[ext_resource type="Texture2D" uid="uid://yyp3jcgp0fss" path="res://characters/player/walk/walk_up.png" id="16_tel4y"]
+[ext_resource type="Texture2D" uid="uid://bsonk67dgkwqx" path="res://characters/player/walk/walk_up3.png" id="17_qkpxi"]
+[ext_resource type="TileSet" uid="uid://c6ro8yd43x7bh" path="res://tiles/tileset_bedroom.tres" id="18_dp3eg"]
+[ext_resource type="FontFile" uid="uid://uvaitt60kkpm" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="19_0ld40"]
+[ext_resource type="Script" uid="uid://vdgtg7bpn768" path="res://scripts/Interactable.gd" id="19_gqmmt"]
+[ext_resource type="AudioStream" uid="uid://16aj6a13w6o4" path="res://sounds/breath.mp3" id="22_y6deb"]
+[ext_resource type="AudioStream" uid="uid://drmravjyg1mj5" path="res://sounds/happysound.mp3" id="23_og1vs"]
+[ext_resource type="AudioStream" uid="uid://8bfgkdmuoxwg" path="res://sounds/sadsound.mp3" id="24_2wyq8"]
+[ext_resource type="AudioStream" uid="uid://n7hhcdl1ussm" path="res://sounds/phone-calling-sfx.mp3" id="24_vxglm"]
+[ext_resource type="AudioStream" uid="uid://cajys1aivjnah" path="res://sounds/city-sounds.mp3" id="25_og1vs"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5q0nq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sugp2")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dp3eg")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_0ld40")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_gqmmt")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_yc10j")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jscy8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_pm3ni")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_jscy8")
+}],
+"loop": true,
+"name": &"walk_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_y6deb")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_og1vs")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_2wyq8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_og1vs")
+}],
+"loop": true,
+"name": &"walk_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_vxglm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_2f3dj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_yq6so")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_2f3dj")
+}],
+"loop": true,
+"name": &"walk_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_fv21b")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_tel4y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_qkpxi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_tel4y")
+}],
+"loop": true,
+"name": &"walk_up",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h2yge"]
+size = Vector2(32, 8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dp3eg"]
+size = Vector2(49, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yc10j"]
+size = Vector2(48, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jscy8"]
+size = Vector2(26, 74)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gqmmt"]
+size = Vector2(48, 50)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yc10j"]
+bg_color = Color(0, 0, 0, 0.6901961)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.4509804)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_yc10j")
+metadata/_edit_horizontal_guides_ = [-86.0]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+
+[node name="TileMap" type="TileMapLayer" parent="."]
+position = Vector2(-256, 0)
+tile_map_data = PackedByteArray("AAAIAAIAAAAHAAAAAAAJAAIAAAAAAAQAAAAKAAIAAAABAAQAAAALAAIAAAAAAAAAAAAMAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAOAAIAAAACAAMAAAAPAAIAAAADAAMAAAAQAAIAAAAAAAAAAAAQAAMAAAAAAAAAAAAQAAQAAAAAAAAAAAAQAAUAAAACAAEAAAAQAAYAAAADAAEAAAAPAAYAAAAAAAAAAAAPAAUAAAAAAAAAAAAPAAQAAAAAAAAAAAAPAAMAAAADAAQAAAAOAAMAAAACAAQAAAANAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAIAAMAAAAHAAAAAAAKAAMAAAAAAAAAAAALAAMAAAAAAAAAAAAMAAMAAAAAAAAAAAANAAQAAAAAAAAAAAAOAAQAAAAAAAAAAAAOAAUAAAAAAAAAAAANAAUAAAAAAAAAAAAMAAQAAAAAAAAAAAALAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAIAAQAAAAHAAAAAAAIAAUAAAAHAAAAAAAJAAUAAAAAAAAAAAAKAAUAAAAAAAAAAAALAAUAAAAAAAAAAAAMAAUAAAAAAAAAAAAOAAYAAAAAAAAAAAALAAYAAAAAAAAAAAAMAAYAAAAAAAAAAAANAAYAAAAAAAAAAAAKAAYAAAAAAAAAAAAJAAYAAAAAAAAAAAAIAAYAAAAFAAEAAAAJAAEAAAAAAAMAAAAKAAEAAAABAAMAAAALAAEAAAABAAAAAAAMAAEAAAABAAAAAAANAAEAAAABAAAAAAAOAAEAAAACAAIAAAAPAAEAAAADAAIAAAAQAAEAAAABAAAAAAAIAAAAAAAGAAAAAAAJAAAAAAAAAAIAAAAKAAAAAAABAAIAAAALAAAAAAACAAAAAAAMAAAAAAACAAAAAAANAAAAAAACAAAAAAAOAAAAAAAEAAEAAAAPAAAAAAACAAAAAAAQAAAAAAACAAAAAAARAAIAAAAFAAAAAAARAAMAAAABAAEAAAARAAQAAAAFAAAAAAARAAUAAAAFAAAAAAARAAYAAAAFAAAAAAARAAEAAAADAAAAAAARAAAAAAAEAAAAAAAIAAEAAAAAAAEAAAAIAAcAAAAHAAAAAAARAAcAAAAFAAAAAAAQAAcAAAAAAAAAAAAPAAcAAAAAAAAAAAAOAAcAAAAAAAAAAAANAAcAAAAAAAAAAAAMAAcAAAAAAAAAAAALAAcAAAAAAAAAAAAKAAcAAAAAAAAAAAAJAAcAAAAAAAAAAAAHAP//AAAGAAEAAAAHAAAAAAAGAAEAAAAHAAEAAAAGAAEAAAAHAAIAAAAGAAEAAAAHAAMAAAAGAAEAAAAHAAQAAAAGAAEAAAAHAAUAAAAGAAEAAAAHAAYAAAAGAAEAAAAHAAcAAAAGAAEAAAAHAAgAAAAGAAEAAAAIAAgAAAAGAAEAAAAJAAgAAAAGAAEAAAAKAAgAAAAGAAEAAAALAAgAAAAGAAEAAAAMAAgAAAAGAAEAAAANAAgAAAAGAAEAAAAOAAgAAAAGAAEAAAAPAAgAAAAGAAEAAAAQAAgAAAAGAAEAAAARAAgAAAAGAAEAAAASAAgAAAAGAAEAAAASAAcAAAAGAAEAAAASAAYAAAAGAAEAAAASAAUAAAAGAAEAAAASAAQAAAAGAAEAAAASAAMAAAAGAAEAAAASAAIAAAAGAAEAAAASAAEAAAAGAAEAAAASAAAAAAAGAAEAAAASAP//AAAGAAEAAAARAP//AAAGAAEAAAAQAP//AAAGAAEAAAAPAP//AAAGAAEAAAAOAP//AAAGAAEAAAANAP//AAAGAAEAAAAMAP//AAAGAAEAAAALAP//AAAGAAEAAAAKAP//AAAGAAEAAAAJAP//AAAGAAEAAAAIAP//AAAGAAEAAAAGAP//AAAGAAEAAAAFAP//AAAGAAEAAAAEAP//AAAGAAEAAAAEAAAAAAAGAAEAAAAEAAEAAAAGAAEAAAAEAAIAAAAGAAEAAAAEAAMAAAAGAAEAAAAEAAQAAAAGAAEAAAAEAAUAAAAGAAEAAAAEAAYAAAAGAAEAAAAEAAcAAAAGAAEAAAAEAAgAAAAGAAEAAAAFAAAAAAAGAAEAAAAFAAEAAAAGAAEAAAAFAAIAAAAGAAEAAAAFAAMAAAAGAAEAAAAFAAQAAAAGAAEAAAAFAAUAAAAGAAEAAAAFAAYAAAAGAAEAAAAFAAcAAAAGAAEAAAAFAAgAAAAGAAEAAAAGAAAAAAAGAAEAAAAGAAEAAAAGAAEAAAAGAAIAAAAGAAEAAAAGAAMAAAAGAAEAAAAGAAQAAAAGAAEAAAAGAAUAAAAGAAEAAAAGAAYAAAAGAAEAAAAGAAcAAAAGAAEAAAAGAAgAAAAGAAEAAAATAP//AAAGAAEAAAATAAAAAAAGAAEAAAATAAEAAAAGAAEAAAATAAIAAAAGAAEAAAATAAMAAAAGAAEAAAATAAQAAAAGAAEAAAATAAUAAAAGAAEAAAATAAYAAAAGAAEAAAATAAcAAAAGAAEAAAATAAgAAAAGAAEAAAAUAP//AAAGAAEAAAAUAAAAAAAGAAEAAAAUAAEAAAAGAAEAAAAUAAIAAAAGAAEAAAAUAAMAAAAGAAEAAAAUAAQAAAAGAAEAAAAUAAUAAAAGAAEAAAAUAAYAAAAGAAEAAAAUAAcAAAAGAAEAAAAUAAgAAAAGAAEAAAAVAP//AAAGAAEAAAAVAAAAAAAGAAEAAAAVAAEAAAAGAAEAAAAVAAIAAAAGAAEAAAAVAAMAAAAGAAEAAAAVAAQAAAAGAAEAAAAVAAUAAAAGAAEAAAAVAAYAAAAGAAEAAAAVAAcAAAAGAAEAAAAVAAgAAAAGAAEAAAA=")
+tile_set = ExtResource("18_dp3eg")
+collision_visibility_mode = 2
+
+[node name="Player" type="CharacterBody2D" parent="."]
+script = ExtResource("1_o5qli")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+position = Vector2(216, 104)
+sprite_frames = SubResource("SpriteFrames_5q0nq")
+animation = &"idle_down"
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+visible = false
+position = Vector2(232, 148)
+shape = SubResource("RectangleShape2D_h2yge")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(0, -1)
+zoom = Vector2(2, 2)
+limit_left = 0
+limit_top = -2
+limit_right = 320
+limit_bottom = 256
+position_smoothing_enabled = true
+
+[node name="WindowInteractable" type="Area2D" parent="."]
+input_pickable = false
+script = ExtResource("19_gqmmt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WindowInteractable"]
+visible = false
+position = Vector2(296.5, 120)
+shape = SubResource("RectangleShape2D_dp3eg")
+
+[node name="PromptLabel" type="Label" parent="WindowInteractable"]
+offset_left = 296.0
+offset_top = 88.0
+offset_right = 380.0
+offset_bottom = 96.0
+theme_override_fonts/font = ExtResource("19_0ld40")
+theme_override_font_sizes/font_size = 7
+text = "[E] Explorar"
+
+[node name="RadioInteractable" type="Area2D" parent="."]
+input_pickable = false
+script = ExtResource("19_gqmmt")
+interaction_name = "cassette"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RadioInteractable"]
+visible = false
+position = Vector2(64, 71)
+shape = SubResource("RectangleShape2D_yc10j")
+
+[node name="PromptLabel" type="Label" parent="RadioInteractable"]
+offset_left = 64.0
+offset_top = 32.0
+offset_right = 148.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("19_0ld40")
+theme_override_font_sizes/font_size = 7
+text = "[E] Explorar"
+
+[node name="TableInteractable" type="Area2D" parent="."]
+input_pickable = false
+script = ExtResource("19_gqmmt")
+interaction_name = "mobile"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TableInteractable"]
+visible = false
+position = Vector2(267, 195)
+shape = SubResource("RectangleShape2D_jscy8")
+
+[node name="PromptLabel" type="Label" parent="TableInteractable"]
+offset_left = 272.0
+offset_top = 224.0
+offset_right = 356.0
+offset_bottom = 232.0
+theme_override_fonts/font = ExtResource("19_0ld40")
+theme_override_font_sizes/font_size = 7
+text = "[E] Explorar"
+
+[node name="BedInteractable" type="Area2D" parent="."]
+input_pickable = false
+script = ExtResource("19_gqmmt")
+interaction_name = "bed"
+
+[node name="PromptLabel" type="Label" parent="BedInteractable"]
+offset_left = 168.0
+offset_top = 48.0
+offset_right = 252.0
+offset_bottom = 56.0
+theme_override_fonts/font = ExtResource("19_0ld40")
+theme_override_font_sizes/font_size = 7
+text = "[E] Explorar"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BedInteractable"]
+visible = false
+position = Vector2(208, 87)
+shape = SubResource("RectangleShape2D_gqmmt")
+
+[node name="DoorInteractable" type="Area2D" parent="."]
+position = Vector2(-8, 8)
+input_pickable = false
+script = ExtResource("19_gqmmt")
+interaction_name = "door"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorInteractable"]
+visible = false
+position = Vector2(32, 208)
+shape = SubResource("RectangleShape2D_dp3eg")
+
+[node name="PromptLabel" type="Label" parent="DoorInteractable"]
+offset_left = -48.0
+offset_top = 176.0
+offset_right = 36.0
+offset_bottom = 184.0
+theme_override_fonts/font = ExtResource("19_0ld40")
+theme_override_font_sizes/font_size = 7
+text = "[E] Explorar"
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="MoodBar" type="ProgressBar" parent="HUD"]
+modulate = Color(0, 2.7802596, 5.1329317, 1)
+self_modulate = Color(2.5210483, 2.5210483, 2.5210483, 1)
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 136.0
+offset_bottom = 24.0
+theme_override_colors/font_color = Color(0.9816019, 0.9314037, 0.9790495, 1)
+theme_override_colors/font_outline_color = Color(0.0021947622, 0.116620176, 0.57030267, 1)
+step = 1.0
+value = 20.0
+show_percentage = false
+
+[node name="ChoicePanel" type="Panel" parent="HUD"]
+z_index = 5
+z_as_relative = false
+clip_contents = true
+offset_right = 304.0
+offset_bottom = 240.0
+focus_neighbor_left = NodePath("Options/OptionA")
+focus_neighbor_right = NodePath("Options/OptionB")
+focus_next = NodePath("Options/OptionB")
+focus_previous = NodePath("Options/OptionA")
+focus_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_yc10j")
+
+[node name="PromptLabel" type="Label" parent="HUD/ChoicePanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 296.0
+offset_bottom = 136.0
+autowrap_mode = 2
+
+[node name="Options" type="HBoxContainer" parent="HUD/ChoicePanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 192.0
+offset_right = 296.0
+offset_bottom = 232.0
+focus_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+alignment = 1
+
+[node name="OptionA" type="Button" parent="HUD/ChoicePanel/Options"]
+layout_mode = 2
+button_mask = 0
+
+[node name="OptionB" type="Button" parent="HUD/ChoicePanel/Options"]
+layout_mode = 2
+button_mask = 0
+
+[node name="FadeRect" type="ColorRect" parent="HUD"]
+modulate = Color(1, 1, 1, 0)
+z_index = 999
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BreathSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("22_y6deb")
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("23_og1vs")
+
+[node name="CallSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_vxglm")
+
+[node name="SadMusicPlayer2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("24_2wyq8")
+
+[node name="BedSpot" type="Marker2D" parent="."]
+z_index = 28
+position = Vector2(-8, -64)
+gizmo_extents = 0.0
+
+[node name="DoorReturnSpot" type="Marker2D" parent="."]
+position = Vector2(-184, 80)
+
+[node name="AmbienceCity" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("25_og1vs")
+autoplay = true
+
+[node name="FadeRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)

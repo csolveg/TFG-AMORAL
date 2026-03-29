@@ -1,0 +1,45 @@
+[gd_scene load_steps=4 format=3 uid="uid://dkpnat0evy2i5"]
+
+[ext_resource type="Texture2D" uid="uid://dg717gpsq4l86" path="res://images/TitleScreen.png" id="1_0vjt2"]
+[ext_resource type="Script" uid="uid://dyptr0051ip5n" path="res://scripts/ending_scene.gd" id="1_5gtp6"]
+[ext_resource type="AudioStream" uid="uid://cajys1aivjnah" path="res://sounds/city-sounds.mp3" id="3_u14vp"]
+
+[node name="EndingScene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_5gtp6")
+
+[node name="FadeRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="cover" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1152.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_0vjt2")
+expand_mode = 2
+stretch_mode = 6
+
+[node name="EndingLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 248.0
+offset_top = 320.0
+offset_right = 840.0
+offset_bottom = 544.0
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AmbientPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_u14vp")

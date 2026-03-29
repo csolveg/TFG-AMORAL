@@ -1,0 +1,93 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdeaoc6ddtc6l"]
+
+[ext_resource type="Script" uid="uid://86jppgk46l30" path="res://scripts/start_scene.gd" id="1_3tgnh"]
+[ext_resource type="Texture2D" uid="uid://dw2ovaw2bdi8q" path="res://images/escena_AMORAL.jpg" id="1_cokmr"]
+[ext_resource type="FontFile" uid="uid://uvaitt60kkpm" path="res://fonts/Press_Start_2P/PressStart2P-Regular.ttf" id="3_u7rsi"]
+[ext_resource type="AudioStream" uid="uid://bc5vh1fmenktc" path="res://sounds/pomoypuerta_sound.mp3" id="5_0kdh5"]
+[ext_resource type="AudioStream" uid="uid://do6evpcb1qjwl" path="res://sounds/escribir-a-maquina.mp3" id="5_sg87u"]
+
+[node name="startScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_3tgnh")
+
+[node name="backgroundImage" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_cokmr")
+expand_mode = 2
+
+[node name="NarrationLabel" type="Label" parent="."]
+z_index = 10
+layout_mode = 0
+offset_left = 103.99999
+offset_top = 536.0
+offset_right = 144.0
+offset_bottom = 559.0
+scale = Vector2(2.416888, 1.6222751)
+theme_override_constants/line_spacing = 2
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_outline_size = 2
+theme_override_fonts/font = ExtResource("3_u7rsi")
+theme_override_font_sizes/font_size = 10
+vertical_alignment = 2
+
+[node name="ScreenDoor" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="ScreenFace" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="ScreenMother" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+expand_mode = 2
+
+[node name="DoorSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_0kdh5")
+
+[node name="TypewriterSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_sg87u")
+
+[node name="FadeRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
