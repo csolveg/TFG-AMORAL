@@ -29,7 +29,9 @@ func _physics_process(_delta: float) -> void:
 	if game != null and ("choice_active" in game) and game.choice_active:
 		velocity = Vector2.ZERO
 		move_and_slide()
-		_update_animation(Vector2.ZERO, false)
+		if not (("dance_minigame_active" in game) and game.dance_minigame_active):
+			_update_animation(Vector2.ZERO, false)
+
 		return
 
 	# 3) Bloqueo por secuencia (baile, teletransporte, etc.)
@@ -51,12 +53,19 @@ func _physics_process(_delta: float) -> void:
 		last_dir = input_dir.normalized()
 
 	# El ánimo ajusta la velocidad: con ánimo bajo, el personaje se mueve “más pesado”
-	var mood_value: float = 20.0
+	var mood_value: float = 40.0
 	if game != null and ("mood" in game):
 		mood_value = float(game.mood)
 
-	var t: float = clamp(mood_value / 100.0, 0.0, 1.0)
-	var mood_factor: float = lerp(min_speed_factor, 1.0, t)
+	var mood_factor: float = 1.0
+	if mood_value <= 25.0:
+		mood_factor = 0.60
+	elif mood_value <= 55.0:
+		mood_factor = 0.80
+	elif mood_value <= 75.0:
+		mood_factor = 1.00
+	else:
+		mood_factor = 1.08
 
 	velocity = input_dir.normalized() * (base_speed * mood_factor)
 	move_and_slide()

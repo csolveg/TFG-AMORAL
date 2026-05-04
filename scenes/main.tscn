@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=4 uid="uid://c1gi3mxlcmasp"]
+[gd_scene load_steps=35 format=4 uid="uid://c1gi3mxlcmasp"]
 
 [ext_resource type="Script" uid="uid://lotad00wvm1" path="res://scripts/player.gd" id="1_o5qli"]
 [ext_resource type="Script" uid="uid://bukbu0b0vs6rc" path="res://scripts/main.gd" id="1_yc10j"]
@@ -26,6 +26,7 @@
 [ext_resource type="AudioStream" uid="uid://8bfgkdmuoxwg" path="res://sounds/sadsound.mp3" id="24_2wyq8"]
 [ext_resource type="AudioStream" uid="uid://n7hhcdl1ussm" path="res://sounds/phone-calling-sfx.mp3" id="24_vxglm"]
 [ext_resource type="AudioStream" uid="uid://cajys1aivjnah" path="res://sounds/city-sounds.mp3" id="25_og1vs"]
+[ext_resource type="AudioStream" uid="uid://b0yq3pkpyyt5x" path="res://sounds/acierto.mp3" id="27_vxglm"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5q0nq"]
 animations = [{
@@ -290,8 +291,7 @@ text = "[E] Explorar"
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="MoodBar" type="ProgressBar" parent="HUD"]
-modulate = Color(0, 2.7802596, 5.1329317, 1)
-self_modulate = Color(2.5210483, 2.5210483, 2.5210483, 1)
+modulate = Color(1, 0.8136476, 0.92850846, 1)
 offset_left = 24.0
 offset_top = 8.0
 offset_right = 136.0
@@ -384,3 +384,6 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="SuccessSfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("27_vxglm")

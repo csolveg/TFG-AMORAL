@@ -5,7 +5,7 @@ extends Node2D
 # =========================================================
 
 # Ánimo actual (0..100). Afecta a velocidad del jugador y activa el cierre al superar el umbral.
-@export var mood: float = 20.0
+@export var mood: float = 40.0
 
 # Ajuste fino para colocar al personaje dentro de la cama cuando se teletransporta
 @export var bed_offset: Vector2 = Vector2.ZERO
@@ -18,7 +18,7 @@ extends Node2D
 # =========================================================
 
 # Umbral que activa la secuencia final (no hace falta llegar a 100)
-@export var mood_max_value: float = 90.0
+@export var mood_max_value: float = 75.0
 
 # Fade-out largo hacia la escena final
 @export var ending_fade_out_duration: float = 7.0
@@ -54,6 +54,7 @@ extends Node2D
 @onready var music_player: AudioStreamPlayer = get_node_or_null("MusicPlayer") as AudioStreamPlayer
 @onready var sad_music_player: AudioStreamPlayer = get_node_or_null("SadMusicPlayer") as AudioStreamPlayer
 @onready var call_sfx: AudioStreamPlayer = get_node_or_null("CallSfx") as AudioStreamPlayer
+@onready var success_sfx: AudioStreamPlayer = get_node_or_null("SuccessSfx") as AudioStreamPlayer
 
 
 # =========================================================
@@ -73,6 +74,9 @@ var choice_active: bool = false
 
 # Bloqueo de jugador para secuencias (baile, cama, paseo, etc.)
 var player_locked: bool = false
+
+# Durante el minijuego de baile, se permiten animaciones aunque haya panel visible
+var dance_minigame_active: bool = false
 
 # Bloqueo final: ya no se permite interactuar ni mover al jugador
 var ending_active: bool = false
@@ -164,6 +168,21 @@ func change_mood(delta: float) -> void:
 func _update_mood_bar() -> void:
 	if mood_bar:
 		mood_bar.value = mood
+
+		var fill_style := mood_bar.get_theme_stylebox("fill")
+		if fill_style is StyleBoxFlat:
+			var style := fill_style.duplicate() as StyleBoxFlat
+
+			if mood <= 25.0:
+				style.bg_color = Color(0.85, 0.4, 0.4)
+			elif mood <= 55.0:
+				style.bg_color = Color(0.95, 0.8, 0.4)
+			elif mood <= 75.0:
+				style.bg_color = Color(0.6, 0.9, 0.5)
+			else:
+				style.bg_color = Color(0.45, 0.8, 1.0)
+
+			mood_bar.add_theme_stylebox_override("fill", style)
 
 
 # =========================================================
@@ -272,8 +291,8 @@ func start_interaction(interaction_name: String) -> void:
 				"prompt": "Podría asomarme un momento.\nNo para “arreglar nada”, solo para recordar que el mundo sigue ahí.\nQuizá respirar hondo me devuelva un poco de espacio por dentro.",
 				"a_text": "Asomarme y respirar",
 				"b_text": "Hoy no puedo",
-				"a_mood": +10.0,
-				"b_mood": -10.0,
+				"a_mood": +6.0,
+				"b_mood": -3.0,
 				"a_action": "window_breath",
 			})
 
@@ -282,8 +301,8 @@ func start_interaction(interaction_name: String) -> void:
 				"prompt": "Tengo mensajes de mis amigos.\nHace tiempo que no saben de mí… y me da vergüenza aparecer ahora.\nPero quizá bastaría con decir la verdad: que no estoy bien, y que me cuesta.",
 				"a_text": "Contestar",
 				"b_text": "No contestar",
-				"a_mood": +10.0,
-				"b_mood": -10.0,
+				"a_mood": +8.0,
+				"b_mood": -6.0,
 				"a_action": "mobile_after",
 			})
 
@@ -292,19 +311,23 @@ func start_interaction(interaction_name: String) -> void:
 				"prompt": "Puedo poner música.\nA veces el cuerpo entiende lo que la cabeza no puede.\nTal vez moverme un poco me saque del bloqueo… o tal vez hoy necesite bajar el ruido.",
 				"a_text": "Música y bailar",
 				"b_text": "Música triste y cama",
-				"a_mood": +10.0,
-				"b_mood": -10.0,
-				"a_action": "cassette_dance",
+				"a_mood": +7.0,
+				"b_mood": -4.0,
+				"a_action": "cassette_minigame",
 				"b_action": "cassette_sad_bed",
 			})
 
 		"door":
+			if mood < 50.0:
+				show_message("Salir ahora mismo se siente demasiado grande.")
+				return
+
 			show_choice({
 				"prompt": "Salir un rato puede dar miedo.\nPero también sé que quedarme aquí alimenta el bucle.\nNo necesito una gran salida: solo dar una vuelta corta y volver.",
 				"a_text": "Salir a pasear",
 				"b_text": "Quedarme en casa",
 				"a_mood": +10.0,
-				"b_mood": -10.0,
+				"b_mood": -5.0,
 				"a_action": "door_walk_return",
 				"b_action": "door_no",
 			})
@@ -314,7 +337,7 @@ func start_interaction(interaction_name: String) -> void:
 				"prompt": "La cama me llama.\nA veces descansar es cuidado… y otras veces es esconderme.\nPuedo tumbarme un momento, o puedo quedarme de pie y sostener lo que siento.",
 				"a_text": "Acostarme",
 				"b_text": "No ahora",
-				"a_mood": -10.0,
+				"a_mood": 0.0,
 				"b_mood": 0.0,
 				"a_action": "bed_lie",
 			})
@@ -333,8 +356,8 @@ func run_action(action: String) -> void:
 		"mobile_after":
 			show_message("Me contestan rápido.\nDicen que se pasan un día a verme y echamos unos videojuegos.\nNo tengo que estar “bien” para que vengan.")
 
-		"cassette_dance":
-			await _run_dance_sequence()
+		"cassette_minigame":
+			await _run_dance_minigame()
 
 		"cassette_sad_bed":
 			await _run_sad_bed_sequence()
@@ -346,6 +369,12 @@ func run_action(action: String) -> void:
 			show_message("Ahora mismo no.\nCuando esté un poco mejor, saldré a pasear.")
 
 		"bed_lie":
+			if mood < 30.0:
+				change_mood(+5.0)
+				show_message("Descansar también puede ser una forma de cuidado.")
+			else:
+				change_mood(-4.0)
+				show_message("Esta vez tumbarme se parece más a esconderme.")
 			await _run_bed_sequence()
 
 		"call_psychologist":
@@ -575,3 +604,105 @@ func position_choice_near_player() -> void:
 	pos.y = clamp(pos.y, margin, viewport_size.y - panel_size.y - margin)
 
 	choice_panel.position = pos
+	
+func _run_dance_minigame() -> void:
+	dance_minigame_active = true
+	player_locked = true
+	if music_player:
+		music_player.play()
+
+	var directions = ["left", "right", "up", "down"]
+	var correct = 0
+	var total = 9
+	var dance_order := [
+		"walk_left2", "walk_left", "walk_left3",
+		"walk_right2", "walk_right", "walk_right3",
+		"walk_down2", "walk_down", "walk_down3"]
+	var previous_dir = ""
+
+	for i in range(total):
+		_pose_anim(dance_order[i % dance_order.size()])
+		var dir = directions[randi() % directions.size()]
+
+		while i > 0 and dir == previous_dir:
+			dir = directions[randi() % directions.size()]
+
+		previous_dir = dir
+
+		show_message(
+			"SIGUE EL RITMO\n\n" +
+			_direction_to_text(dir) +
+			"\n\nAciertos: " + str(correct) + " / " + str(total)
+		)
+
+		var success = await _wait_for_direction(dir, 0.75)
+
+		if success:
+			correct += 1
+
+			if success_sfx:
+				success_sfx.play()
+
+			show_message(
+				"SIGUE EL RITMO\n\n" +
+				_direction_to_text(dir) +
+				"\n\nAciertos: " + str(correct) + " / " + str(total) +
+				"\n\nBIEN"
+			)
+			await get_tree().create_timer(0.30).timeout
+		else:
+			await get_tree().create_timer(0.30).timeout
+
+	if music_player:
+		music_player.stop()
+
+	
+
+	if correct == total:
+		change_mood(10)
+		show_message("Por un momento, el cuerpo ha ido por delante del miedo.")
+	elif correct >= 7:
+		change_mood(7)
+		show_message("No ha sido perfecto, pero moverme me ha ayudado.")
+	elif correct >= 4:
+		change_mood(4)
+		show_message("Me costó seguir el ritmo, pero lo intenté.")
+	else:
+		change_mood(1)
+		show_message("Hoy incluso bailar pesa… pero probarlo ya cuenta.")
+		
+	dance_minigame_active = false
+	_pose_anim("idle_down")
+	player_locked = false
+		
+func _wait_for_direction(dir: String, time_limit: float) -> bool:
+
+	var timer = 0.0
+
+	while timer < time_limit:
+
+		await get_tree().process_frame
+		timer += get_process_delta_time()
+
+		if dir == "left" and Input.is_action_just_pressed("ui_left"):
+			return true
+		if dir == "right" and Input.is_action_just_pressed("ui_right"):
+			return true
+		if dir == "up" and Input.is_action_just_pressed("ui_up"):
+			return true
+		if dir == "down" and Input.is_action_just_pressed("ui_down"):
+			return true
+
+	return false
+func _direction_to_text(dir: String) -> String:
+	match dir:
+		"left":
+			return "IZQUIERDA"
+		"right":
+			return "DERECHA"
+		"up":
+			return "ARRIBA"
+		"down":
+			return "ABAJO"
+		_:
+			return "?"
