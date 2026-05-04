@@ -25,6 +25,7 @@ Cada decisión afecta al estado emocional del personaje, representado mediante u
 ## Estado del proyecto
 
 Versión en desarrollo correspondiente a la PEC 3 del TFG.
+La versión PEC3 incluye sistema de ánimo, interacciones contextuales, minijuego musical y secuencia final.
 
 ## Autor
 
