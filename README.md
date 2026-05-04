@@ -24,7 +24,7 @@ Cada decisión afecta al estado emocional del personaje, representado mediante u
 
 ## Estado del proyecto
 
-Versión en desarrollo correspondiente a la PEC 2 del TFG.
+Versión en desarrollo correspondiente a la PEC 3 del TFG.
 
 ## Autor
 
